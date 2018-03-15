@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "paci.iut.classroomcommunity"
         minSdkVersion 26
@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [auth0Domain: "@string/com_auth0_domain", auth0Scheme: "demo"]
     }
     buildTypes {
         release {
@@ -20,6 +21,8 @@ android {
 }
 
 dependencies {
+    compile 'com.auth0.android:auth0:1.+'
+    compile 'com.auth0.android:lock:2.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -27,4 +30,15 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.3.0'
+            }
+        }
+    }
 }
