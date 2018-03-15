@@ -44,8 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onAuthentication(Credentials credentials) {
             Toast.makeText(getApplicationContext(), "Log In - Success", Toast.LENGTH_SHORT).show();
-            //@todo change Login activity to main page
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
 
