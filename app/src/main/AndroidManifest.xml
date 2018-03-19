@@ -25,6 +25,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Lock.Theme" />
         <activity android:name=".MainActivity"></activity>
+      <activity android:name=".ListeAmis"/>
     </application>
 
 </manifest>
