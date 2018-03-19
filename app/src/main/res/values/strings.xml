@@ -2,5 +2,18 @@
     <string name="app_name">ClassroomCommunity</string>
     <string name="com_auth0_client_id">1mPWTmA7YF1EdMgSiR5dOhW7t1v19grc</string>
     <string name="com_auth0_domain">jmossetc.eu.auth0.com</string>
+    <string name="static_question">La somme de 4 et 4 ?</string>
+    <string name="static_reponse_1">16</string>
+    <string name="static_reponse_2">4</string>
+    <string name="static_reponse_3">8</string>
+    <string name="submit">Confirmer</string>
+    <string name="good_answer">Vous avez selectionné la bonne réponse</string>
+    <string name="bad_answer">Vous avez selectionné une mauvaise réponse</string>
+
+
+    <string name="refresh">Refresh the access_token</string>
+    <string name="login">Log in</string>
+    <string name="logout">Logout</string>
+    <string name="app_description">Un réseau social pour classes</string>
 
 </resources>

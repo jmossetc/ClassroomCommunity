@@ -4,12 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="paci.iut.classroomcommunity.MainActivity">
+    android:orientation="vertical"
+    android:padding="@dimen/activity_general_margin">
 
-  <Button
-    android:id="@+id/button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:text="Afficher les amis" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
+
+    <Button
+        android:id="@+id/friends_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/white"
+        android:padding="@dimen/activity_general_margin"
+        android:textColor="@color/blue_text"
+        android:text="Amis" />
+
+    <Button
+        android:id="@+id/quizzButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_general_margin"
+
+        android:background="@android:color/white"
+        android:padding="@dimen/activity_general_margin"
+        android:textColor="@color/blue_text"
+        android:text="Quizz" />
+
+    <Button
+        android:id="@+id/refreshTokenButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_general_margin"
+        android:background="@android:color/white"
+        android:padding="@dimen/activity_general_margin"
+        android:text="@string/refresh"
+        android:textColor="@color/blue_text" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_general_margin"
+        android:background="@android:color/white"
+        android:padding="@dimen/activity_general_margin"
+        android:text="@string/logout"
+        android:textColor="@color/blue_text" />
+
 </LinearLayout>
