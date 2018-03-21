@@ -15,7 +15,7 @@
     <string name="login">Log in</string>
     <string name="logout">Logout</string>
     <string name="app_description">Un réseau social pour classes</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

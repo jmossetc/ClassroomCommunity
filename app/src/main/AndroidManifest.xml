@@ -29,8 +29,8 @@
         <activity android:name=".QuizzConfirmationActivity" />
         <activity android:name=".ListeAmis" />
         <activity
-            android:name=".NavigationActivity"
-            android:label="@string/title_activity_navigation"
+            android:label="@string/title_activity_drawer"
+            android:name=".DrawerActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
