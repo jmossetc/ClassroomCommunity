@@ -26,8 +26,12 @@
             android:theme="@style/Lock.Theme" />
         <activity android:name=".MainActivity" />
         <activity android:name=".QuizzActivity" />
-        <activity android:name=".QuizzConfirmationActivity"/>
-        <activity android:name=".ListeAmis"/>
+        <activity android:name=".QuizzConfirmationActivity" />
+        <activity android:name=".ListeAmis" />
+        <activity
+            android:name=".NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
