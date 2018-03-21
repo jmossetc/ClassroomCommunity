@@ -15,22 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.auth0.android.Auth0;
 import com.auth0.android.authentication.AuthenticationAPIClient;
-import com.auth0.android.authentication.AuthenticationException;
-import com.auth0.android.callback.BaseCallback;
-import com.auth0.android.result.Credentials;
 
 import paci.iut.classroomcommunity.utils.CredentialsManager;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private AuthenticationAPIClient authenticationClient;
-    private Fragment fragment;
 
+    private Fragment fragment;
+    private AuthenticationAPIClient authenticationClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,57 +105,26 @@ public class DrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_quiz) {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            FragAccueil accueil = new FragAccueil();
+            FragQuiz accueil = new FragQuiz();
             ft.replace(R.id.fragment, accueil);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.addToBackStack(null);
             ft.commit();
 
-            Button refreshTokenButton = (Button) findViewById(R.id.refreshTokenButton);
-            Button logoutButton = (Button) findViewById(R.id.logout);
-            Button friendsButton = (Button) findViewById(R.id.friends_button);
-            Button quizzButton = (Button) findViewById(R.id.quizzButton);
-
-            quizzButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), QuizzActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            friendsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), ListeAmis.class);
-                    startActivity(intent);
-                }
-            });
-            refreshTokenButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    renewAuthentication();
-                }
-            });
-            logoutButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    logout();
-                }
-            });
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_amis) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragAmis accueil = new FragAmis();
+            ft.replace(R.id.fragment, accueil);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.addToBackStack(null);
+            ft.commit();
+        } else if (id == R.id.nav_logout) {
+                CredentialsManager.deleteCredentials(this);
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -168,33 +132,5 @@ public class DrawerActivity extends AppCompatActivity
         return true;
     }
 
-    private void renewAuthentication() {
-        String refreshToken = CredentialsManager.getCredentials(this).getRefreshToken();
-        authenticationClient.renewAuth(refreshToken).start(new BaseCallback<Credentials, AuthenticationException>() {
-            @Override
-            public void onSuccess(final Credentials payload) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(DrawerActivity.this, "New access_token: " + payload.getAccessToken(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
 
-            @Override
-            public void onFailure(AuthenticationException error) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(DrawerActivity.this, "Failed to get the new access_token", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
-
-
-    private void logout() {
-        CredentialsManager.deleteCredentials(this);
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
-    }
 }
