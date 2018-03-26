@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onAuthentication(Credentials credentials) {
             Toast.makeText(getApplicationContext(), "Log In - Success", Toast.LENGTH_SHORT).show();
+            CredentialsManager.saveCredentials(LoginActivity.this, credentials);
             startActivity(new Intent(getApplicationContext(), DrawerActivity.class));
             finish();
         }

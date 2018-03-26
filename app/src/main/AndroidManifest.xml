@@ -25,13 +25,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Lock.Theme" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".QuizzActivity" />
-        <activity android:name=".QuizzConfirmationActivity" />
         <activity android:name=".ListeAmis" />
         <activity
-            android:label="@string/title_activity_drawer"
+            android:label="@string/title_activity_navigation"
             android:name=".DrawerActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
