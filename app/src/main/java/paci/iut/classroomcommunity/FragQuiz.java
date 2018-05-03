@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.auth0.android.Auth0;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +37,11 @@ public class FragQuiz extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_quizz, container, false);
         final HttpGetRequest get = new HttpGetRequest();
+
+
+        Auth0 auth0 = new Auth0(getActivity());
+
+
         List<CategoryQuestion> listCat= new ArrayList<>();
         JSONObject jsonObj = null;
         try {
@@ -121,10 +128,30 @@ public class FragQuiz extends Fragment {
                     e.printStackTrace();
                 }
 
+
+                HttpGetRequest createGame = new HttpGetRequest();
+                String jsonidGame="id";
+                String idGame="provisoire";
+                try {
+                    jsonidGame = createGame.execute("http://163.172.176.20/app_dev.php/api/create_game/"+selectedCat.getCat().replaceAll("\\s", "")+"/10").get();
+                    JSONObject json = new JSONObject(jsonidGame);
+                    idGame=json.getString("idGame");
+                    Log.e("idGame",""+idGame);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 FragGame game = new FragGame();
                 Bundle args = new Bundle();
                 args.putString("json",resultat);
+                args.putString("idGame",idGame);
                 game.setArguments(args);
                 ft.replace(R.id.fragment, game);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

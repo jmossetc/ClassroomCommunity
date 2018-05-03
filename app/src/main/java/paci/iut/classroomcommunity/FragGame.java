@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Vincent
@@ -29,6 +30,7 @@ public class FragGame extends Fragment implements View.OnClickListener{
     private String bonne_reponse;
     private int id;
     private int score;
+    private String idGame;
     private Boolean passed;
     private TextView screen_quest;
     private TextView questionView;
@@ -46,6 +48,7 @@ public class FragGame extends Fragment implements View.OnClickListener{
         questionList = new ArrayList<>();
         Bundle args = getArguments();
         String jsonQuest = args.getString("json");
+        idGame = args.getString("idGame");
         try {
             JSONObject json_global = new JSONObject(jsonQuest);
             if (json_global.getInt("response_code") == 0) {
@@ -130,7 +133,17 @@ public class FragGame extends Fragment implements View.OnClickListener{
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setCancelable(true);
+            if(score<0)score=0;
             builder.setMessage("La partie est terminée : \nTu as réalisé un score de "+score+"points.");
+            HttpGetRequest updateScore = new HttpGetRequest();
+
+            try {
+                updateScore.execute("http://163.172.176.20/app_dev.php/api/update_score/"+idGame+"/10/"+score).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
             AlertDialog dialog = builder.create();
             dialog.show();
         }
@@ -144,6 +157,7 @@ public class FragGame extends Fragment implements View.OnClickListener{
         Button bouton = (Button)view;
         if(bouton.getText()==bonne_reponse){
             score++;
+
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setCancelable(true);
             builder.setMessage("Bonne réponse!!!");
