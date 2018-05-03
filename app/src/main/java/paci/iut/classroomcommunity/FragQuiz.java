@@ -11,8 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Vincent
@@ -25,7 +29,24 @@ public class FragQuiz extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_quizz, container, false);
-        List<Integer> answersId = new ArrayList<Integer>();
+
+
+
+      String json  = null;
+      try {
+        json = new HttpGetRequest().execute("https://opentdb.com/api.php?amount=10").get();
+        Log.e("test html", json);
+        JSONObject jsonquestions = new JSONObject(json);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+
+
+      List<Integer> answersId = new ArrayList<Integer>();
         for (int i=0; i < rootView.getChildCount(); i++) {
             View v = rootView.getChildAt(i);
 
