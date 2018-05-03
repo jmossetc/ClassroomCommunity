@@ -1,7 +1,5 @@
 package paci.iut.classroomcommunity;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -27,7 +25,7 @@ public class    QuizzResultsFragment extends Fragment {
             Log.d("selectedAnswer", String.valueOf(selectedAnswer));
         }
         TextView text = (TextView) rootView.findViewById(R.id.quizz_confirmation);
-        if(selectedAnswer == R.id.radio_3){
+        if(selectedAnswer == R.id.difficulty){
             text.setText("Bonne réponse");
         }
         else{

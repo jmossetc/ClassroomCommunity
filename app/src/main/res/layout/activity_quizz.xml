@@ -10,27 +10,52 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/static_question"
+        android:text="@string/title_param_quiz"
         android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/radio_1"
-        android:layout_below="@+id/header"
+    <EditText
+        android:id="@+id/nbrquest"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:inputType="number"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
         android:text="@string/static_reponse_1" />
 
-    <Button
-        android:id="@+id/radio_2"
-        android:layout_below="@+id/radio_1"
+    <Spinner
+        android:id="@+id/category"
+        android:layout_below="@+id/nbrquest"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/static_reponse_2" />
 
-    <Button
-        android:id="@+id/radio_3"
-        android:layout_below="@+id/radio_2"
+    <Spinner
+        android:id="@+id/difficulty"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/category"
         android:text="@string/static_reponse_3" />
+
+    <Button
+        android:id="@+id/valid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/difficulty"
+        android:layout_centerHorizontal="true"
+        android:text="Valider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/valid">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultat : " />
+    </ScrollView>
 </RelativeLayout>

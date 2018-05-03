@@ -3,7 +3,6 @@ package paci.iut.classroomcommunity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,25 +10,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.auth0.android.Auth0;
 import com.auth0.android.authentication.AuthenticationAPIClient;
 
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import paci.iut.classroomcommunity.utils.CredentialsManager;
 
@@ -60,6 +51,7 @@ public class DrawerActivity extends AppCompatActivity
 
 
         Auth0 auth0 = new Auth0(this);
+
         auth0.setOIDCConformant(true);
         authenticationClient = new AuthenticationAPIClient(auth0);
 
