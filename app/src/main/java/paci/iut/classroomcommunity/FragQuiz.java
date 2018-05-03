@@ -1,6 +1,7 @@
 package paci.iut.classroomcommunity;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -93,10 +94,12 @@ public class FragQuiz extends Fragment {
 
         valid.setOnClickListener(new View.OnClickListener() {
 
-            String result = "https://opentdb.com/api.php?amount="+nbrquest.getText();
+
 
             @Override
             public void onClick(View view) {
+                String nbquest=nbrquest.getText().toString();
+                String result = "https://opentdb.com/api.php?amount="+nbrquest.getText()+"&type=multiple";
                 CategoryQuestion selectedCat = (CategoryQuestion) category.getSelectedItem();
                 if(selectedCat.getId()!=-1){
                     result=result+"&category="+selectedCat.getId();
@@ -105,18 +108,27 @@ public class FragQuiz extends Fragment {
                     result = result + "&difficulty=" + difficulty.getSelectedItem().toString().toLowerCase();
 
                 }
-
+                String resultat="";
 
                 try {
                      HttpGetRequest getResult = new HttpGetRequest();
-                     String resultat = getResult.execute(result).get();
-                     Log.e("result",result);
+                     resultat = getResult.execute(result).get();
+                     Log.e("result",resultat);
                     resultview.setText(resultat);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FragGame game = new FragGame();
+                Bundle args = new Bundle();
+                args.putString("json",resultat);
+                game.setArguments(args);
+                ft.replace(R.id.fragment, game);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.commit();
             }
         });
 
